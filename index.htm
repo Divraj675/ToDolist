@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>To-Do List</title>
+    <style>
+        /* Reset / Normalize */
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: inherit;
+            padding: 0;
+            margin: 0;
+            font-size: inherit;
+            color: inherit;
+        }
+
+        html {
+            box-sizing: border-box;
+            font-size: calc(1rem + (5) * ((100vw - 300px) / (1080 - 300)));
+        }
+
+        :root,
+        html,
+        body {
+            height: 100%;
+            background: #ffeead;
+        }
+
+        input[type=checkbox] {
+            width: 0;
+            height: 0;
+            opacity: 0;
+        }
+
+        input[type=checkbox]+label {
+            position: relative;
+        }
+
+        input[type=checkbox]+label::before {
+            content: '';
+            position: absolute;
+            top: 0.1em;
+            left: -1.5em;
+            width: 1em;
+            height: .75em;
+            border: thin solid lightgray;
+            margin-right: 1em;
+            padding: 0 .1em 1.1em .1em;
+        }
+
+        input[type=checkbox]:focus+label::before {
+            outline: rgb(59, 153, 252) solid 0.1em;
+        }
+
+        input[type=checkbox]:checked+label::before {
+            content: '🗸';
+        }
+
+        /* Header */
+
+        header,
+        footer {
+            display: flex;
+            height: 15%;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        header h1 {
+            font-size: 3rem;
+             font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+             order: 1px solid black;
+             margin-top: 100px;
+             margin-bottom: 100px;
+            margin-right: 180px;
+              margin-left: 80px;
+         
+        }
+
+        /* Main content */
+
+        main {
+            height: 70%;
+        }
+
+        #add-item {
+            display: flex;
+            height: 3em;
+            flex-direction: row;
+            justify-content: space-between;
+            justify-content: space-evenly;
+            align-items: center;
+            border-bottom: 0.1em solid lightgray;
+        } 
+
+     
+
+        #list-item {
+            display: flex;
+            justify-content: center;
+            height: calc(100% - 3rem);
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+
+        #list-todo {
+            display: grid;
+            grid-column-start: auto;
+            grid-template-columns: max-content;
+            grid-auto-rows: max-content;
+            height: 100%;
+            font-size: 1.3rem;
+            list-style: none;
+        }
+
+        #list-todo>li {
+            height: 3em;
+        }
+
+        #add-todo {
+            width: 7em;
+        }
+         
+        label[ for=label-todo] {
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+         display:inline-block;
+          width: 145px;
+         cursor: pointer;
+        color: brown;
+        font-size: 1rem;
+             }
+
+             #label-todo {
+               width: 20rem;
+
+             }
+        
+
+        /* Footer */
+        footer {
+            border-top: 0.1em solid lightgray;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>To Do List</h1>
+    </header>
+    <main>
+        <form action="/" method="get" id="add-item">
+            <label for="label-todo">Add a To-Do</label>
+            <input id="label-todo" type="text" name="label-todo">
+            <input id="add-todo" type="button"  alt="Add a To Do" value="Add">
+        </form>
+        <form action="/" method="get" id="list-item">
+            <ul id="list-todo">
+
+            </ul>
+        </form>
+    </main>
+    <footer>
+        Copyright &copy;2019
+    </footer>
+    <template id="todo-item">
+        <li>
+            <input id="todo-select" type="checkbox" name="todo-select" onclick="checkBoxUpdate(this)">
+            <label for="todo-select"></label>
+        </li>
+    </template>
+    <script src="js/index.js"></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+             navigator.serviceWorker.register('/sw.js');
+         });
+     }</script>
+</body>
+
+</html>
